@@ -14,7 +14,6 @@ namespace Ex02_Othelo
         public Board(int i_BoardSize)
         {
             m_BoardSize = i_BoardSize;
-            //m_BoardArray = new char[m_BoardSize, m_BoardSize];
             InitializeBoard(m_BoardSize);
         }
         

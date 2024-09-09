@@ -5,7 +5,6 @@
         static void Main(string[] args)
         {
             OthelloGame.InitializeGame();
-            System.Console.WriteLine();
         }
     }
 }
