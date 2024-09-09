@@ -34,11 +34,11 @@ namespace Ex02_Othelo
                 }
             }
             int m_BoardMiddle = i_BoardSize / 2 - 1;
-            m_GameArray[m_BoardMiddle, m_BoardMiddle] = 'O';
-            m_GameArray[m_BoardMiddle, m_BoardMiddle + 1] = 'X';
+            m_GameArray[m_BoardMiddle, m_BoardMiddle] = m_Player1.PlayerDisc;
+            m_GameArray[m_BoardMiddle, m_BoardMiddle + 1] = m_Player2.PlayerDisc;
             m_BoardMiddle++;
-            m_GameArray[m_BoardMiddle, m_BoardMiddle - 1] = 'X';
-            m_GameArray[m_BoardMiddle, m_BoardMiddle] = 'O';
+            m_GameArray[m_BoardMiddle, m_BoardMiddle - 1] = m_Player2.PlayerDisc;
+            m_GameArray[m_BoardMiddle, m_BoardMiddle] = m_Player1.PlayerDisc;
         }
 
         public void UpdateGameArray(int rowIndex, int colIndex, Player i_CurrentPlayer, Player i_OtherPlayer)
@@ -55,6 +55,18 @@ namespace Ex02_Othelo
             m_GameArray[rowIndex + 1, colIndex + 1] = i_CurrentPlayer.PlayerDisc;
         }
 
+        public static bool CheckIfBoardSizeValid(string i_UserInput)
+        {
+            int m_BoardSize;
+            bool m_ParseSuccess = int.TryParse(i_UserInput, out m_BoardSize);
+            if ((m_BoardSize != 6 && m_BoardSize != 8) || !m_ParseSuccess)
+            {
+                return false;
+            }
+            return true;
+        }
+
+
         public void StartGame()
         {
             Screen.Clear();
@@ -68,7 +80,6 @@ namespace Ex02_Othelo
                 if (CheckGameOver())
                 {
                     DeclareWinner();
-                    Console.WriteLine("Game over!");
                     gameOver = true;
                     break;
                 }
@@ -83,13 +94,12 @@ namespace Ex02_Othelo
                 Console.WriteLine($"It's {m_CurrentPlayer.PlayerName}'s turn.");
                 if (!m_CurrentPlayer.IsComputer)
                 {
-                    Console.Write($"Type 'Q' to quit the game or choose a cell (e.g E3) to place your disc: '{m_CurrentPlayer.PlayerDisc}': ");
-                    userInput = Console.ReadLine();
-                    if (userInput.ToUpper() == "Q")
+                    bool playerChoseToLeave=false;
+                    (playerChoseToLeave,userInput)= OthelloGame.RequestForMoveOrExit(m_CurrentPlayer);
+                    if (playerChoseToLeave)
                     {
-                        gameOver = true;
-                        Console.WriteLine("Exiting the game...");
-                        Environment.Exit(0);
+                        gameOver = true;    
+                        continue;
                     }
                     else
                     {
@@ -116,8 +126,7 @@ namespace Ex02_Othelo
                             Console.WriteLine("Invalid move! Please choose a valid move.");
                         }
                     }
-
-                    }
+                }
                 else
                 {
                     List<(int rowIndex, int colIndex)> validMoves;
@@ -147,7 +156,6 @@ namespace Ex02_Othelo
 
             }
         }
-
         private List<(int rowIndex, int colIndex)> validMovesGenerator(Player i_CurrentPlayer)
         {
             List<(int, int)> validMoves = new List<(int, int)>();
@@ -328,6 +336,7 @@ namespace Ex02_Othelo
 
         private void DeclareWinner()
         {
+            Console.WriteLine("Game Over!");
             if (m_Player1.PlayerScore > m_Player2.PlayerScore)
             {
                 Console.WriteLine($"{m_Player1.PlayerName} wins with {m_Player1.PlayerScore} points! {m_Player2.PlayerName} has {m_Player2.PlayerScore} points.");
@@ -340,16 +349,11 @@ namespace Ex02_Othelo
             {
                 Console.WriteLine($"The game is a tie! Both players have {m_Player2.PlayerScore} points.");
             }
-            Console.WriteLine("Click anything but 'Q' if you would like a rematch. press 'Q' to Exit");
-            string userChose = Console.ReadLine();
-            if (userChose.ToUpper() == "Q")
+
+            bool userChoseRematch;
+            userChoseRematch = OthelloGame.AskUserForRematchOrExit(m_Player1,m_Player2, m_BoardGameSize);
+            if (userChoseRematch)
             {
-                Console.WriteLine("Exiting the game...");
-                Environment.Exit(0);
-            }
-            else
-            {
-                Console.WriteLine("Restarting the game...");
                 GameManager m_GameManager = new GameManager(m_BoardGameSize, m_Player1.PlayerName, m_Player2.PlayerName);
                 m_Player1.PlayerScore = 2;
                 m_Player2.PlayerScore = 2;
@@ -357,7 +361,6 @@ namespace Ex02_Othelo
                 Board m_GameBoard = new Board(m_BoardGameSize);
                 m_GameManager.StartGame();
             }
-
         }
     }
 }
