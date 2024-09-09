@@ -5,56 +5,60 @@ namespace Ex02_Othelo
     class Board
     {
         int m_BoardSize;
-        public enum BoardColumn
+        private char[,] m_BoardArray;
+        public enum eBoardColumn
         {
             A, B, C, D, E, F, G, H
         }
-        private char[,] m_BoardArray;
 
         public Board(int i_BoardSize)
         {
             m_BoardSize = i_BoardSize;
-            //m_BoardArray = new char[m_BoardSize, m_BoardSize];
             InitializeBoard(m_BoardSize);
         }
         
         public void InitializeBoard(int i_BoardSize)
         {
-            int m_Rows = i_BoardSize * 2 + 2; 
-            int m_Cols = i_BoardSize * 4 + 2; 
-
-            m_BoardArray = new char[m_Rows, m_Cols];
-            for (int rowIndex = 0; rowIndex < m_Rows; rowIndex++)
+            int rows = i_BoardSize * 2 + 2; 
+            int cols = i_BoardSize * 4 + 2; 
+            m_BoardArray = new char[rows, cols];
+            for (int rowIndex = 0; rowIndex < rows; rowIndex++)
             {
-                for (int colIndex = 0; colIndex < m_Cols; colIndex++)
+                for (int colIndex = 0; colIndex < cols; colIndex++)
                 {
                     m_BoardArray[rowIndex, colIndex] = ' ';
                 }
             }
+
             for (int rowIndex = 0; rowIndex < i_BoardSize; rowIndex++)
             {
                 m_BoardArray[0, 3 + rowIndex * 4] = (char)('A' + rowIndex);
             }
-            for (int rowIndex = 1; rowIndex < m_Rows; rowIndex += 2)
+
+            for (int rowIndex = 1; rowIndex < rows; rowIndex += 2)
             {
-                for (int colIndex = 1; colIndex < m_Cols; colIndex++)
+                for (int colIndex = 1; colIndex < cols; colIndex++)
                 {
                     m_BoardArray[rowIndex, colIndex] = '=';
                 }
-                if (rowIndex + 1 < m_Rows)
+
+                if (rowIndex + 1 < rows)
                 {
                     m_BoardArray[rowIndex + 1, 0] = (char)('1' + (rowIndex / 2)); 
                 }
             }
-            for (int rowIndex = 2; rowIndex < m_Rows; rowIndex += 2)
+
+            for (int rowIndex = 2; rowIndex < rows; rowIndex += 2)
             {
-                for (int colIndex = 1; colIndex < m_Cols; colIndex += 4)
+                for (int colIndex = 1; colIndex < cols; colIndex += 4)
                 {
                     m_BoardArray[rowIndex, colIndex] = '|';         
                 }
             }
+
             SetBoardToStartingPoint(i_BoardSize);
         }
+
         public char[,] GetBoard()
         {
             return m_BoardArray;
@@ -67,12 +71,12 @@ namespace Ex02_Othelo
 
         public void SetBoardToStartingPoint(int i_BoardSize)
         {
-            int m_MidBoard = i_BoardSize;
-            m_BoardArray[m_MidBoard, m_MidBoard * 2 - 1] = 'O';
-            m_BoardArray[m_MidBoard, m_MidBoard * 2 + 3] = 'X';
-            m_MidBoard += 2;
-            m_BoardArray[m_MidBoard, m_MidBoard * 2 - 5] = 'X';
-            m_BoardArray[m_MidBoard, m_MidBoard * 2 - 1] = 'O';
+            int midBoard = i_BoardSize;
+            m_BoardArray[midBoard, midBoard * 2 - 1] = 'O';
+            m_BoardArray[midBoard, midBoard * 2 + 3] = 'X';
+            midBoard += 2;
+            m_BoardArray[midBoard, midBoard * 2 - 5] = 'X';
+            m_BoardArray[midBoard, midBoard * 2 - 1] = 'O';
         }
 
         public void PrintBoard()
@@ -83,28 +87,27 @@ namespace Ex02_Othelo
                 {
                     Console.Write(m_BoardArray[rowIndex, colIndex]);
                 }
+
                 Console.WriteLine();
             }
         }
         public void FlipDiscs(int i_RowIndex, int i_ColIndex, char i_PlayerDisc)
         {
-            int m_RowIndex = i_RowIndex * 2 + 2; 
-            int m_ColIndex = i_ColIndex * 4 + 3; 
-
-            if (m_RowIndex >= 0 && m_RowIndex < m_BoardArray.GetLength(0) && m_ColIndex >= 0 && m_ColIndex < m_BoardArray.GetLength(1))
+            int rowIndex = i_RowIndex * 2 + 2; 
+            int colIndex = i_ColIndex * 4 + 3; 
+            if (rowIndex >= 0 && rowIndex < m_BoardArray.GetLength(0) && colIndex >= 0 && colIndex < m_BoardArray.GetLength(1))
             {
-                m_BoardArray[m_RowIndex, m_ColIndex] = i_PlayerDisc;  
+                m_BoardArray[rowIndex, colIndex] = i_PlayerDisc;  
             }
         }
 
         public void PlaceDisc(int i_RowIndex, int i_ColIndex, char i_PlayerDisc)
         {
-            int m_RowIndex = i_RowIndex * 2 + 2;  
-            int m_ColIndex = i_ColIndex * 4 + 3;  
-
-            if (m_RowIndex >= 0 && m_RowIndex < m_BoardArray.GetLength(0) && m_ColIndex >= 0 && m_ColIndex < m_BoardArray.GetLength(1))
+            int rowIndex = i_RowIndex * 2 + 2;  
+            int colIndex = i_ColIndex * 4 + 3;  
+            if (rowIndex >= 0 && rowIndex < m_BoardArray.GetLength(0) && colIndex >= 0 && colIndex < m_BoardArray.GetLength(1))
             {
-                m_BoardArray[m_RowIndex, m_ColIndex] = i_PlayerDisc;  
+                m_BoardArray[rowIndex, colIndex] = i_PlayerDisc;  
             }
             else
             {
