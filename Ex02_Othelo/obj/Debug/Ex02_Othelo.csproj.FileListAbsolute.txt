@@ -25,3 +25,11 @@ C:\projects\C24 Ex02 Tal 315788653 Naama 315585661\Ex02_Othelo\obj\Debug\Ex02_Ot
 C:\projects\C24 Ex02 Tal 315788653 Naama 315585661\Ex02_Othelo\obj\Debug\Ex02_Oth.9EDB8B5F.Up2Date
 C:\projects\C24 Ex02 Tal 315788653 Naama 315585661\Ex02_Othelo\obj\Debug\OthelloGame.exe
 C:\projects\C24 Ex02 Tal 315788653 Naama 315585661\Ex02_Othelo\obj\Debug\OthelloGame.pdb
+C:\projects\C24 Ex02 Tal 315788653 Naama 315585661\Ex02_Othelo\Ex02_Othelo\bin\Debug\OthelloGame.exe.config
+C:\projects\C24 Ex02 Tal 315788653 Naama 315585661\Ex02_Othelo\Ex02_Othelo\bin\Debug\OthelloGame.exe
+C:\projects\C24 Ex02 Tal 315788653 Naama 315585661\Ex02_Othelo\Ex02_Othelo\bin\Debug\OthelloGame.pdb
+C:\projects\C24 Ex02 Tal 315788653 Naama 315585661\Ex02_Othelo\Ex02_Othelo\obj\Debug\Ex02_Othelo.csproj.AssemblyReference.cache
+C:\projects\C24 Ex02 Tal 315788653 Naama 315585661\Ex02_Othelo\Ex02_Othelo\obj\Debug\Ex02_Othelo.csproj.CoreCompileInputs.cache
+C:\projects\C24 Ex02 Tal 315788653 Naama 315585661\Ex02_Othelo\Ex02_Othelo\obj\Debug\Ex02_Oth.9EDB8B5F.Up2Date
+C:\projects\C24 Ex02 Tal 315788653 Naama 315585661\Ex02_Othelo\Ex02_Othelo\obj\Debug\OthelloGame.exe
+C:\projects\C24 Ex02 Tal 315788653 Naama 315585661\Ex02_Othelo\Ex02_Othelo\obj\Debug\OthelloGame.pdb
