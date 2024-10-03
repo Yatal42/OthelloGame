@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Ex02_Othelo
+namespace Othello
 {
     class Player
     {

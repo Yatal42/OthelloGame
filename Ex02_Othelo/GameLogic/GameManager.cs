@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Ex02.ConsoleUtils; // Assuming this namespace contains Screen.Clear() method
 
-namespace Ex02_Othelo
+namespace Othello
 {
     class GameManager
     {

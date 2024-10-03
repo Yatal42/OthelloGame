@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ex02_Othelo
+namespace Othello
 {
     class Board
     {
